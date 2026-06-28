@@ -100,7 +100,8 @@ h1,h2,h3{font-family:var(--disp);letter-spacing:-.03em;line-height:1.0;font-weig
     <div id="formView">
       <h1>Get early <span class="grad">access</span></h1>
       <p class="sub">Be first to bring your whole health story into one place.</p>
-      <form name="early-access" method="POST" data-netlify="true" id="signupForm">
+      <form name="early-access" method="POST" netlify id="signupForm">
+        <input type="hidden" name="form-name" value="early-access" />
         <div class="field">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" placeholder="Your name" required />
