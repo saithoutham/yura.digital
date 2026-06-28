@@ -212,13 +212,14 @@ h1,h2,h3{font-family:var(--disp);letter-spacing:-.03em;line-height:1.0;font-weig
 .split .copy li svg{flex:none;margin-top:2px;color:#aab6ff}
 .split .shot-wrap{display:flex;justify-content:center}
 
-/* live demo */
+/* app showcase */
 .demo{padding:130px 0;text-align:center}
-.demo-phone{position:relative;width:300px;height:629px;margin:56px auto 0;border-radius:46px;background:#0a0b0f;padding:9px;
-  box-shadow:0 0 0 2px rgba(255,255,255,.06),0 40px 120px -30px rgba(0,0,0,.9),0 0 90px -22px var(--glow)}
-.demo-phone .notch{position:absolute;top:16px;left:50%;transform:translateX(-50%);width:96px;height:24px;background:#000;border-radius:16px;z-index:5}
-.demo-phone .screen{position:relative;width:282px;height:611px;border-radius:38px;overflow:hidden;background:#0a0b0f}
-.demo-phone iframe{width:393px;height:852px;border:0;display:block;transform:scale(.7176);transform-origin:top left}
+.showcase{display:flex;justify-content:center;gap:28px;margin-top:56px;flex-wrap:wrap}
+.showcase .phone{width:260px;transform:scale(.95);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.showcase .phone:nth-child(2){transform:scale(1.02)}
+.showcase .phone:hover{transform:scale(1.04);box-shadow:0 0 0 2px rgba(255,255,255,.08),0 50px 140px -30px rgba(0,0,0,.9),0 0 100px -20px var(--glow)}
+@media(max-width:860px){.showcase{gap:18px}.showcase .phone{width:220px}}
+@media(max-width:600px){.showcase .phone:nth-child(3){display:none}.showcase .phone{width:240px}}
 
 /* CTA */
 .cta{padding:160px 0;text-align:center;position:relative;overflow:hidden}
@@ -268,7 +269,7 @@ footer .disc{margin-top:50px;padding-top:26px;border-top:1px solid var(--line);c
       <a href="#features">Features</a>
       <a href="#doctor">For your doctor</a>
       <a href="research.html">Research</a>
-      <a href="#demo">Demo</a>
+      <a href="#demo">App</a>
       <a class="btn btn-iris cta" href="signup.html" style="padding:10px 20px;font-size:14px">Get early access</a>
     </div>
   </div>
@@ -288,7 +289,7 @@ footer .disc{margin-top:50px;padding-top:26px;border-top:1px solid var(--line);c
       <p class="sub">Yura unifies every wearable you own, learns your personal baseline, and flags what's coming, days before you'd feel it.</p>
       <div class="row">
         <a class="btn btn-iris" href="signup.html">Get early access</a>
-        <a class="btn btn-ghost" href="#demo">Try the live demo</a>
+        <a class="btn btn-ghost" href="#demo">See it in action</a>
       </div>
       <p class="note">Wellness insights and doctor discussion prompts. Not a medical device.</p>
     </div>
@@ -304,7 +305,6 @@ footer .disc{margin-top:50px;padding-top:26px;border-top:1px solid var(--line);c
 <!-- SCROLLYTELLING -->
 <section class="story pad" id="how">
   <div class="shead rev">
-    <span class="eyebrow">How it works</span>
     <h2>It tells you what's next,<br>not just what happened.</h2>
   </div>
   <div class="story-grid wrap">
@@ -357,7 +357,6 @@ footer .disc{margin-top:50px;padding-top:26px;border-top:1px solid var(--line);c
 <!-- FEATURES -->
 <section class="pad wrap" id="features">
   <div class="shead rev">
-    <span class="eyebrow">Why Yura</span>
     <h2>Built to do what the<br>others can't.</h2>
     <p>Most apps show you numbers. Yura understands them, in the context of your whole history.</p>
   </div>
@@ -417,7 +416,6 @@ footer .disc{margin-top:50px;padding-top:26px;border-top:1px solid var(--line);c
 <section class="pad wrap" id="doctor">
   <div class="split">
     <div class="copy rev">
-      <span class="eyebrow">For your doctor</span>
       <h2>Twelve minutes, made to count.</h2>
       <p>Yura packages what changed into a concise, evidence-backed summary, so the appointment starts with answers instead of catch-up.</p>
       <ul>
@@ -432,16 +430,16 @@ footer .disc{margin-top:50px;padding-top:26px;border-top:1px solid var(--line);c
   </div>
 </section>
 
-<!-- LIVE DEMO -->
+<!-- APP SHOWCASE -->
 <section class="demo wrap" id="demo">
   <div class="shead rev" style="padding-bottom:0">
-    <span class="eyebrow">Live demo</span>
-    <h2>Try it yourself.</h2>
-    <p>The actual app, running right here. Tap around and explore.</p>
+    <h2>See it in action.</h2>
+    <p>Every screen designed around clarity, not clutter.</p>
   </div>
-  <div class="demo-phone rev d1">
-    <div class="notch"></div>
-    <div class="screen"><iframe id="demoFrame" src="app/index.html?v=13&theme=dark" title="Yura live demo" loading="lazy"></iframe></div>
+  <div class="showcase rev d1">
+    <div class="phone"><div class="notch"></div><div class="glass-shot"><img class="on" src="img/app-today.png" alt="Today dashboard" /></div></div>
+    <div class="phone"><div class="notch"></div><div class="glass-shot"><img class="on" src="img/app-predict.png" alt="Predictive signals" /></div></div>
+    <div class="phone"><div class="notch"></div><div class="glass-shot"><img class="on" src="img/app-connect.png" alt="Connected devices" /></div></div>
   </div>
 </section>
 
@@ -454,7 +452,7 @@ footer .disc{margin-top:50px;padding-top:26px;border-top:1px solid var(--line);c
     <p>Join the early access list and be first to bring your whole health story into one place.</p>
     <div class="row">
       <a class="btn btn-iris" href="signup.html">Get early access</a>
-      <a class="btn btn-ghost" href="#demo">Explore the demo</a>
+      <a class="btn btn-ghost" href="#demo">See the app</a>
     </div>
   </div>
 </section>
@@ -476,7 +474,7 @@ footer .disc{margin-top:50px;padding-top:26px;border-top:1px solid var(--line);c
           <a href="#how">How it works</a>
           <a href="#features">Features</a>
           <a href="#doctor">For your doctor</a>
-          <a href="#demo">Live demo</a>
+          <a href="#demo">App</a>
         </div>
         <div class="col">
           <h4>Company</h4>
