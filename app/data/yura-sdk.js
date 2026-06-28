@@ -35,7 +35,7 @@ export const METRICS = {
   hrv:      { id:'hrv',      label:'HRV',            unit:'ms',  icon:'wave',   base:58,  sd:8,   recent:-13,  betterHigh:true,  fmt:v=>`${Math.round(v)} ms`, short:v=>Math.round(v) },
   rhr:      { id:'rhr',      label:'Resting HR',     unit:'bpm', icon:'heart',  base:54,  sd:3,   recent:6,    betterHigh:false, fmt:v=>`${Math.round(v)} bpm`, short:v=>Math.round(v) },
   steps:    { id:'steps',    label:'Steps',          unit:'',    icon:'shoe',   base:8200,sd:2400,recent:-900, betterHigh:true,  fmt:v=>Math.round(v).toLocaleString(), short:v=>(v/1000).toFixed(1)+'k' },
-  stress:   { id:'stress',   label:'Stress',         unit:'',    icon:'spark',  base:38,  sd:9,   recent:19,   betterHigh:false, fmt:v=>Math.round(v), short:v=>Math.round(v) },
+  stress:   { id:'stress',   label:'Stress',         unit:'',    icon:'spark',  base:38,  sd:9,   recent:19,   betterHigh:false, fmt:v=>`${Math.round(v)}/100`, short:v=>Math.round(v) },
   spo2:     { id:'spo2',     label:'SpO₂',           unit:'%',   icon:'lung',   base:97,  sd:1,   recent:-0.6, betterHigh:true,  fmt:v=>`${v.toFixed(0)}%`, short:v=>v.toFixed(0) },
   temp:     { id:'temp',     label:'Skin Temp',      unit:'°',   icon:'temp',   base:0,   sd:0.15,recent:0.42, betterHigh:false, fmt:v=>`${v>=0?'+':''}${v.toFixed(1)}°`, short:v=>`${v>=0?'+':''}${v.toFixed(1)}` },
   resp:     { id:'resp',     label:'Resp Rate',      unit:'/min',icon:'lung',   base:14.4,sd:0.7, recent:1.5,  betterHigh:false, fmt:v=>`${v.toFixed(1)}/min`, short:v=>v.toFixed(1) },
@@ -76,13 +76,19 @@ function buildSeries(metricKey, seed) {
   const today = Date.now();
   for (let i = DAYS - 1; i >= 0; i--) {
     const date = isoDate(today - i * dayMs);
-    const weekly = Math.sin((DAYS - i) / 7 * Math.PI) * m.sd * 0.35; // weekly rhythm
+    const weekly = Math.sin((DAYS - i) / 7 * Math.PI) * m.sd * 0.35;
     let val = gauss(r, m.base + weekly, m.sd * 0.6);
-    // recent 7-day shift (the "what changed" story)
     if (i < 7) val += m.recent * (1 - i / 9);
-    if (metricKey === 'spo2') val = Math.min(100, val);
-    if (metricKey === 'steps') val = Math.max(800, val);
-    if (metricKey === 'sleep') val = Math.max(180, val);
+    // clamp all metrics to sane ranges
+    if (metricKey === 'spo2') val = Math.min(100, Math.max(88, val));
+    else if (metricKey === 'steps') val = Math.max(2000, Math.min(25000, val));
+    else if (metricKey === 'sleep') val = Math.max(240, Math.min(660, val));
+    else if (metricKey === 'hrv') val = Math.max(15, Math.min(120, val));
+    else if (metricKey === 'rhr') val = Math.max(38, Math.min(100, val));
+    else if (metricKey === 'stress') val = Math.max(5, Math.min(95, val));
+    else if (metricKey === 'temp') val = Math.max(-1.5, Math.min(2.5, val));
+    else if (metricKey === 'resp') val = Math.max(10, Math.min(22, val));
+    else if (metricKey === 'hearing') val = Math.max(0, Math.min(90, val));
     out.push({ date, value: Math.round(val * 100) / 100 });
   }
   return out;

@@ -31,7 +31,7 @@ export function baseline(metricKey) {
   const bMean = mean(baseArr), bSd = sd(baseArr, bMean);
   const rMean = mean(recentArr);
   const z = (rMean - bMean) / bSd;
-  const pct = bMean !== 0 ? (rMean - bMean) / Math.abs(bMean) * 100 : 0;
+  const pct = Math.abs(bMean) > 1 ? (rMean - bMean) / Math.abs(bMean) * 100 : 0;
   return {
     metric: metricKey, mean: bMean, sd: bSd, recent: rMean,
     last: s[s.length - 1], z, pct, n: baseArr.length, series: s,
