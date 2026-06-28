@@ -1,0 +1,10 @@
+# Yura marketing site — static, no build step.
+[build]
+  publish = "."
+  command = ""
+
+# Long-cache the static assets (logos, frames, screenshots)
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

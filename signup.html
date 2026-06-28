@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Get Early Access · Yura</title>
+<meta name="description" content="Join the Yura early access list. Be first to bring your whole health story into one place." />
+<link rel="icon" href="img/mark-black.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --void:#06070a; --ink:#f3f5f9; --dim:#a7aebc; --faint:#697080;
+  --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.15);
+  --glass:linear-gradient(160deg,rgba(40,44,55,.5),rgba(14,16,22,.46));
+  --iris:linear-gradient(135deg,#aab6ff 0%,#d7dcff 50%,#f3f5ff 100%);
+  --iris-2:linear-gradient(120deg,#7c8cff,#b3bcff);
+  --glow:rgba(150,168,255,.4);
+  --veil-rgb:6 7 10;
+  --btn-ink:#0a0b10;
+  --disp:'Inter Tight','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --head:'Inter Tight','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --sans:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --ease:cubic-bezier(.22,.7,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:var(--disp);letter-spacing:-.03em;line-height:1.0;font-weight:600}
+.grad{background:var(--iris);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.blob{position:fixed;border-radius:50%;filter:blur(100px);opacity:.4;pointer-events:none;z-index:0}
+.blob.a{width:500px;height:500px;background:radial-gradient(circle,rgba(120,140,255,.45),transparent 70%);top:-120px;left:-100px}
+.blob.b{width:450px;height:450px;background:radial-gradient(circle,rgba(90,110,220,.35),transparent 70%);bottom:-100px;right:-100px}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:60;background:rgba(6,7,10,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .in{max-width:1200px;margin:0 auto;padding:20px 32px;display:flex;align-items:center;gap:34px}
+.nav .logo{height:24px;display:block}
+.nav .links{display:flex;gap:30px;margin-left:auto;align-items:center}
+.nav .links a{font-size:14px;font-weight:500;color:var(--dim);transition:color .2s}
+.nav .links a:hover{color:var(--ink)}
+
+/* page */
+.page{flex:1;display:flex;align-items:center;justify-content:center;padding:120px 32px 80px;position:relative;z-index:1}
+.card{width:100%;max-width:480px;background:var(--glass);border:1px solid var(--line-2);border-radius:28px;padding:48px 40px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;border-radius:28px;padding:1px;background:linear-gradient(140deg,rgba(170,182,255,.4),transparent 50%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.card h1{font-family:var(--head);font-weight:500;font-size:clamp(28px,4vw,38px);letter-spacing:-.04em;margin-bottom:10px}
+.card .sub{color:var(--dim);font-size:16px;margin-bottom:36px}
+
+/* form */
+.field{margin-bottom:20px}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--dim);letter-spacing:.04em;margin-bottom:8px}
+.field input{width:100%;padding:14px 18px;border-radius:14px;border:1px solid var(--line-2);background:rgba(255,255,255,.04);color:var(--ink);font-family:var(--sans);font-size:15px;outline:none;transition:border-color .25s var(--ease),box-shadow .25s var(--ease)}
+.field input:focus{border-color:rgba(170,182,255,.5);box-shadow:0 0 0 3px rgba(150,168,255,.12)}
+.field input::placeholder{color:var(--faint)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--disp);font-weight:600;font-size:15px;border-radius:999px;padding:16px 28px;cursor:pointer;border:none;transition:.25s var(--ease);width:100%;margin-top:8px}
+.btn-iris{background:var(--iris);color:var(--btn-ink);box-shadow:0 10px 40px -8px var(--glow)}
+.btn-iris:hover{transform:translateY(-2px);box-shadow:0 16px 50px -6px var(--glow)}
+
+.back{display:inline-flex;align-items:center;gap:6px;margin-top:24px;font-size:13px;color:var(--faint);transition:color .2s}
+.back:hover{color:var(--ink)}
+.back svg{transition:transform .2s var(--ease)}
+.back:hover svg{transform:translateX(-3px)}
+
+.note{margin-top:20px;font-size:12px;color:var(--faint);text-align:center;line-height:1.5}
+
+/* success state */
+.success{display:none;text-align:center}
+.success .check{width:56px;height:56px;border-radius:50%;background:rgba(170,182,255,.12);display:grid;place-items:center;margin:0 auto 20px;color:#aab6ff}
+.success h2{font-family:var(--head);font-weight:500;font-size:26px;letter-spacing:-.03em;margin-bottom:10px}
+.success p{color:var(--dim);font-size:15px}
+
+@media(max-width:520px){
+  .card{padding:36px 24px;border-radius:22px}
+}
+</style>
+</head>
+<body>
+
+<div class="blob a"></div>
+<div class="blob b"></div>
+
+<nav class="nav">
+  <div class="in">
+    <a href="index.html"><img class="logo" src="img/logo-white.png" alt="Yura" /></a>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+    </div>
+  </div>
+</nav>
+
+<main class="page">
+  <div class="card">
+    <div id="formView">
+      <h1>Get early <span class="grad">access</span></h1>
+      <p class="sub">Be first to bring your whole health story into one place.</p>
+      <form name="early-access" method="POST" data-netlify="true" id="signupForm">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required />
+        </div>
+        <button type="submit" class="btn btn-iris">Join the waitlist</button>
+      </form>
+      <p class="note">No spam, ever. We'll only reach out when your spot is ready.</p>
+      <a class="back" href="index.html"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg> Back to home</a>
+    </div>
+    <div class="success" id="successView">
+      <div class="check"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <h2>You're on the list.</h2>
+      <p>We'll reach out when your spot is ready. In the meantime, explore the demo.</p>
+      <a class="back" href="index.html" style="justify-content:center;margin-top:28px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg> Back to home</a>
+    </div>
+  </div>
+</main>
+
+<script>
+document.getElementById('signupForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData(form);
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(data).toString()
+  }).then(() => {
+    document.getElementById('formView').style.display = 'none';
+    document.getElementById('successView').style.display = 'block';
+  }).catch(() => {
+    document.getElementById('formView').style.display = 'none';
+    document.getElementById('successView').style.display = 'block';
+  });
+});
+</script>
+</body>
+</html>

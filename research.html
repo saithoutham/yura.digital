@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Research — Yura</title>
+<meta name="description" content="Yura Research. Cutting-edge ML models for predictive health." />
+<link rel="icon" href="img/mark-black.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --void:#06070a; --ink:#f3f5f9; --dim:#aeb4c0; --faint:#7a808c;
+  --iris:linear-gradient(135deg,#aab6ff 0%,#d7dcff 50%,#f3f5ff 100%);
+  --disp:'Inter Tight','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --sans:'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --ease:cubic-bezier(.22,.7,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--void);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;position:relative;overflow:hidden}
+a{color:inherit;text-decoration:none}
+/* very visible landscape background */
+.bg{position:fixed;inset:0;z-index:0;background:url('img/land-a.png') center 55%/cover no-repeat;filter:grayscale(1) contrast(1.12) brightness(1.05)}
+.bg-veil{position:fixed;inset:0;z-index:1;background:
+  linear-gradient(to right,rgba(6,7,10,.92) 0%,rgba(6,7,10,.6) 42%,rgba(6,7,10,.25) 100%),
+  linear-gradient(to bottom,rgba(6,7,10,.7),transparent 35%,transparent 60%,rgba(6,7,10,.85))}
+.glow{position:fixed;top:-160px;left:-120px;width:560px;height:560px;border-radius:50%;z-index:1;filter:blur(120px);
+  background:radial-gradient(circle,rgba(120,140,255,.4),transparent 70%);pointer-events:none}
+.top,main,footer{position:relative;z-index:2}
+.top{padding:26px 40px}
+.top img{height:22px;display:block}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 40px;max-width:680px}
+h1{font-family:var(--disp);font-weight:500;letter-spacing:-.055em;line-height:1.0;font-size:clamp(30px,4.4vw,58px)}
+p{color:var(--dim);font-size:16px;line-height:1.6;margin-top:20px;max-width:500px}
+.back{margin-top:30px;font-size:13.5px;font-weight:600;color:var(--dim);transition:color .2s var(--ease)}
+.back:hover{color:var(--ink)}
+footer{padding:24px 40px;color:var(--faint);font-size:12px}
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="bg-veil"></div>
+  <div class="glow"></div>
+  <div class="top"><a href="index.html"><img src="img/logo-white.png" alt="Yura" /></a></div>
+  <main>
+    <h1>Cutting-edge ML models<br>for predictive health.</h1>
+    <p>We're building the research that powers Yura's predictive signals. Our models, methods, and results will be published here.</p>
+    <a class="back" href="index.html">← Back to home</a>
+  </main>
+  <footer>© 2026 Yura. Not a medical device.</footer>
+</body>
+</html>
