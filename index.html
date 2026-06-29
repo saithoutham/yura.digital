@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Yura · Wearable healthcare, reinvented</title>
 <meta name="description" content="Yura connects every wearable you own, learns your personal baseline, and predicts what's coming before it hits. Your health, in context." />
-<link rel="icon" href="img/mark-black.png" />
+<link rel="icon" href="img/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -38,7 +38,7 @@ section{position:relative;z-index:2}
 h1,h2,h3{font-family:var(--disp);letter-spacing:-.03em;line-height:1.0;font-weight:600}
 /* major headings: super-tight tracking */
 .hero h1,.shead h2,.statement h2,.cta h2,.story .step h3,footer .word{font-family:var(--head);font-weight:500;letter-spacing:-.06em}
-.grad{background:var(--iris);-webkit-background-clip:text;background-clip:text;color:transparent}
+.grad{background:var(--iris);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 2px;display:inline-block}
 .shine{background:var(--shine);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
 @keyframes shine{to{background-position:220% center}}
 .eyebrow{font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint)}
@@ -157,7 +157,7 @@ h1,h2,h3{font-family:var(--disp);letter-spacing:-.03em;line-height:1.0;font-weig
 .phone{position:relative;width:300px;aspect-ratio:393/852;border-radius:48px;background:#0a0b0f;
   box-shadow:0 0 0 2px rgba(255,255,255,.06),0 40px 120px -30px rgba(0,0,0,.9),0 0 90px -20px var(--glow);padding:9px}
 .phone .glass-shot{position:absolute;inset:9px;border-radius:40px;overflow:hidden;background:#0a0b0f}
-.phone img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s var(--ease)}
+.phone img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transition:opacity .7s var(--ease)}
 .phone img.on{opacity:1}
 .phone .notch{position:absolute;top:18px;left:50%;transform:translateX(-50%);width:96px;height:26px;background:#000;border-radius:16px;z-index:3}
 
@@ -306,11 +306,6 @@ footer .disc{margin-top:50px;padding-top:26px;border-top:1px solid var(--line);c
   <div class="in">
     <a href="#top"><img class="logo" src="img/logo-white.png" alt="Yura" /></a>
     <div class="links">
-      <a href="#how">How it works</a>
-      <a href="#features">Features</a>
-      <a href="#doctor">For your doctor</a>
-      <a href="research.html">Research</a>
-      <a href="#demo">Demo</a>
       <a class="btn btn-iris cta" href="signup.html" style="padding:10px 20px;font-size:14px">Get early access</a>
     </div>
   </div>
@@ -449,7 +444,6 @@ footer .disc{margin-top:50px;padding-top:26px;border-top:1px solid var(--line);c
   <div class="sec-land" style="background-image:url('img/land-d.png')"></div>
   <div class="in rev">
     <h2>The average tells you nothing.<br><span class="grad">You</span> are the baseline.</h2>
-    <p>Yura learns the rhythm that's normal for you, so the moment something drifts, you're the first to know, not the last.</p>
   </div>
 </section>
 
@@ -475,7 +469,6 @@ footer .disc{margin-top:50px;padding-top:26px;border-top:1px solid var(--line);c
 <section class="demo wrap" id="demo">
   <div class="shead rev" style="padding-bottom:0">
     <h2>Try it yourself.</h2>
-    <p>The actual app, running right here. Tap around and explore.</p>
   </div>
   <div class="demo-phone rev d1">
     <div class="notch"></div>
