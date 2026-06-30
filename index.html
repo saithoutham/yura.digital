@@ -78,56 +78,74 @@ h1,h2,h3{font-family:var(--disp);letter-spacing:-.03em;line-height:1.0;font-weig
 .nav.scrolled{background:rgba(6,7,10,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 @media(max-width:760px){.nav .links a:not(.cta){display:none}}
 
-/* ---- HERO: landscape backdrop + live app, scroll-reveal ---- */
-.hero{min-height:100vh;display:flex;align-items:center;overflow:hidden;position:relative;z-index:3;padding:120px 0 50px}
-.hero-scene{position:absolute;inset:-8% -4%;z-index:0}
-.hlay{position:absolute;left:-4%;right:-4%;background-size:cover;background-position:center;will-change:transform}
-.hlay{background-repeat:no-repeat}
-/* soft distant haze up top (blur is intentional → depth) */
-.hlay.far{top:0;height:50%;background-image:url('img/land-c.png');background-position:center 30%;background-size:cover;
-  opacity:.34;filter:grayscale(1) blur(2px) brightness(.9);
-  -webkit-mask-image:linear-gradient(to bottom,#000 12%,transparent 94%);mask-image:linear-gradient(to bottom,#000 12%,transparent 94%)}
-/* crisp horizon band along the bottom (kept near native scale → sharp) */
-.hlay.near{bottom:0;height:60%;background-image:url('img/land-a.png');background-position:center 60%;background-size:cover;
-  opacity:.82;filter:grayscale(1) contrast(1.24) brightness(1.1);
-  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 26%,#000 76%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 26%,#000 76%,transparent 100%)}
+/* ---- HERO ---- */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;overflow:hidden;position:relative;z-index:3;padding:140px 32px 0;text-align:center}
+.hero-scene{position:absolute;inset:0;z-index:0;pointer-events:none}
+.hlay{position:absolute;left:-4%;right:-4%;background-size:cover;background-position:center;will-change:transform;background-repeat:no-repeat}
+.hlay.far{top:40%;height:70%;background-image:url('img/land-c.png');background-position:center 40%;background-size:cover;
+  opacity:.22;filter:grayscale(1) blur(3px) brightness(.8);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 30%,#000 70%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 30%,#000 70%,transparent 100%)}
+.hlay.near{display:none}
 .aurora{position:absolute;inset:0;z-index:1;background:
-  radial-gradient(48% 42% at 26% 30%,rgba(140,155,255,.22),transparent 60%),
-  radial-gradient(46% 40% at 80% 38%,rgba(120,110,255,.16),transparent 60%);
-  animation:drift 16s ease-in-out infinite alternate}
-@keyframes drift{to{transform:translate3d(4%,-3%,0) scale(1.06)}}
-/* film grain for texture (hides upscale softness, reads as aesthetic) */
-.grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.14;mix-blend-mode:overlay;
+  radial-gradient(55% 45% at 50% 20%,rgba(120,140,255,.28),transparent 60%),
+  radial-gradient(40% 35% at 20% 60%,rgba(100,90,255,.16),transparent 55%),
+  radial-gradient(40% 35% at 80% 55%,rgba(140,120,255,.14),transparent 55%);
+  animation:drift 18s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(2%,-2%,0) scale(1.04)}}
+.grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.12;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:140px 140px}
 .hero-scene::after{content:"";position:absolute;inset:0;z-index:2;background:
-  linear-gradient(to right,rgb(var(--veil-rgb)/.86) 0%,rgb(var(--veil-rgb)/.42) 40%,transparent 68%),
-  linear-gradient(to bottom,rgb(var(--veil-rgb)/.4) 0%,transparent 26%,transparent 60%,rgb(var(--veil-rgb)/.6) 84%,rgb(var(--veil-rgb)) 100%)}
-.hero .in{position:relative;z-index:4;max-width:1200px;margin:0 auto;width:100%;padding:0 32px;display:grid;grid-template-columns:1.05fr .95fr;gap:24px;align-items:center}
-.hero .copy>*{opacity:0;animation:rise 1s var(--ease) forwards}
-.hero .copy>*:nth-child(1){animation-delay:.12s}.hero .copy>*:nth-child(2){animation-delay:.26s}
-.hero .copy>*:nth-child(3){animation-delay:.4s}.hero .copy>*:nth-child(4){animation-delay:.54s}
-.hero .copy>*:nth-child(5){animation-delay:.66s}
-@keyframes rise{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
-.hero .eyebrow{display:inline-flex;align-items:center;gap:9px;margin-bottom:22px}
-.hero .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--iris-2);box-shadow:0 0 14px var(--glow);animation:pulse 2.4s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.hero h1{font-size:clamp(48px,7vw,104px);font-weight:500;letter-spacing:-.07em;margin:0;line-height:.98;text-align:left}
-.hero p.sub{font-size:clamp(16px,1.7vw,20px);color:var(--sub);font-weight:400;max-width:480px;margin:24px 0 0;text-align:left}
-.hero .row{display:flex;gap:14px;margin-top:32px;justify-content:flex-start;flex-wrap:wrap}
-.hero .note{margin-top:20px;font-size:12.5px;color:var(--faint)}
-.hero-phone{perspective:1500px;display:flex;justify-content:center;z-index:4;opacity:0;animation:rise 1.1s var(--ease) .5s forwards}
-.hero-phone .phone{will-change:transform;transform-style:preserve-3d}
-@media(max-width:880px){
-  .hero .in{grid-template-columns:1fr;text-align:center;gap:44px}
-  .hero h1,.hero p.sub{text-align:center;margin-left:auto;margin-right:auto}
-  .hero .row{justify-content:center}
+  radial-gradient(80% 60% at 50% 0%,transparent 40%,rgb(var(--veil-rgb)/.7) 80%,rgb(var(--veil-rgb)) 100%),
+  linear-gradient(to bottom,rgb(var(--veil-rgb)/.5) 0%,transparent 20%)}
+
+/* hero copy — centered above phones */
+.hero .copy{position:relative;z-index:4;max-width:760px;margin:0 auto;opacity:0;animation:rise 1s var(--ease) .1s forwards}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+.hero .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line-2);border-radius:999px;padding:6px 14px 6px 8px;margin-bottom:28px;font-size:12.5px;font-weight:600;color:var(--dim);background:rgba(255,255,255,.04);backdrop-filter:blur(10px)}
+.hero .pill .dot{width:6px;height:6px;border-radius:50%;background:var(--iris-2);box-shadow:0 0 10px var(--glow);animation:pulse 2.4s ease-in-out infinite;flex:none}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{font-family:var(--head);font-size:clamp(44px,6.5vw,96px);font-weight:500;letter-spacing:-.06em;margin:0;line-height:.95;color:var(--ink)}
+.hero p.sub{font-size:clamp(15px,1.5vw,19px);color:var(--sub);font-weight:400;max-width:520px;margin:22px auto 0;line-height:1.6}
+.hero .row{display:flex;gap:12px;margin-top:34px;justify-content:center;flex-wrap:wrap}
+.hero .note{margin-top:16px;font-size:12px;color:var(--faint)}
+
+/* hero phones stage — 3 phones in a fan */
+.hero-stage{position:relative;z-index:4;width:100%;max-width:900px;margin:52px auto 0;height:520px;flex:none;opacity:0;animation:rise 1.1s var(--ease) .5s forwards}
+.hero-stage .hphone{position:absolute;bottom:0}
+.hero-stage .hphone.c{left:50%;transform:translateX(-50%);z-index:3;width:240px}
+.hero-stage .hphone.l{left:50%;transform:translateX(-310px) rotate(-8deg);z-index:2;width:210px;opacity:.85}
+.hero-stage .hphone.r{left:50%;transform:translateX(100px) rotate(8deg);z-index:2;width:210px;opacity:.85}
+/* floating stat cards */
+.hstat{position:absolute;background:rgba(16,18,28,.72);border:1px solid var(--line-2);border-radius:16px;padding:12px 16px;backdrop-filter:blur(20px);white-space:nowrap;z-index:5;opacity:0;animation:floatin .8s var(--ease) forwards}
+@keyframes floatin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.hstat .sl{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.hstat .sv{font-family:var(--disp);font-weight:700;font-size:20px;color:var(--ink);display:flex;align-items:baseline;gap:5px}
+.hstat .sd{font-size:11px;font-weight:600;padding:2px 7px;border-radius:999px}
+.hstat .sd.up{background:rgba(100,255,150,.12);color:#6effa0}
+.hstat .sd.dn{background:rgba(255,120,100,.12);color:#ff9090}
+.hstat .sd.w{background:rgba(170,182,255,.12);color:#aab6ff}
+/* card positions */
+.hstat.s1{left:calc(50% - 420px);top:60px;animation-delay:.7s}
+.hstat.s2{right:calc(50% - 420px);top:100px;animation-delay:.85s}
+.hstat.s3{left:calc(50% - 400px);bottom:140px;animation-delay:1s}
+.hstat.s4{right:calc(50% - 380px);bottom:180px;animation-delay:.95s}
+/* fade bottom of stage into page */
+.hero-stage::after{content:"";position:absolute;bottom:0;left:-5%;right:-5%;height:200px;background:linear-gradient(to bottom,transparent,var(--void));pointer-events:none;z-index:6}
+
+@media(max-width:900px){
+  .hstat.s1,.hstat.s3{left:8px}
+  .hstat.s2,.hstat.s4{right:8px}
 }
 @media(max-width:600px){
-  .hero{min-height:auto;padding:100px 0 40px}
+  .hero{padding:110px 20px 0}
   .hero h1{font-size:38px}
   .hero p.sub{font-size:15px}
   .hero .row{flex-direction:column;align-items:center;gap:10px}
-  .hero-phone .phone{width:220px}
+  .hero-stage{height:360px;margin-top:36px}
+  .hero-stage .hphone.c{width:170px}
+  .hero-stage .hphone.l{transform:translateX(-215px) rotate(-8deg);width:150px}
+  .hero-stage .hphone.r{transform:translateX(65px) rotate(8deg);width:150px}
+  .hstat{display:none}
   .pad{padding:70px 0}
   .wrap{padding:0 18px}
   .shead h2{font-size:28px}
@@ -319,25 +337,61 @@ footer .disc{margin-top:50px;padding-top:26px;border-top:1px solid var(--line);c
 <!-- HERO -->
 <header class="hero" id="top">
   <div class="hero-scene" id="scene">
-    <div class="hlay far"  data-depth="10"></div>
+    <div class="hlay far" data-depth="10"></div>
     <div class="aurora"></div>
-    <div class="hlay near" data-depth="30"></div>
     <div class="grain"></div>
   </div>
-  <div class="in">
-    <div class="copy">
-      <h1>Wearable healthcare,<br><span class="shine">reinvented.</span></h1>
-      <p class="sub">Yura unifies every wearable you own, learns your personal baseline, and flags what's coming, days before you'd feel it.</p>
-      <div class="row">
-        <a class="btn btn-iris" href="signup.html">Get early access</a>
-        <a class="btn btn-ghost" href="#demo">Try the live demo</a>
-      </div>
-      <p class="note">Wellness insights and doctor discussion prompts. Not a medical device.</p>
+
+  <div class="copy">
+    <div class="pill"><span class="dot"></span>Early access open now</div>
+    <h1>Wearable healthcare,<br><span class="shine">reinvented.</span></h1>
+    <p class="sub">Yura unifies every wearable you own, learns your personal baseline, and flags what's coming — days before you'd feel it.</p>
+    <div class="row">
+      <a class="btn btn-iris" href="signup.html">Get early access</a>
+      <a class="btn btn-ghost" href="#demo">Try the live demo</a>
     </div>
-    <div class="hero-phone" id="heroPhone">
-      <div class="phone">
+    <p class="note">Wellness insights and doctor discussion prompts. Not a medical device.</p>
+  </div>
+
+  <!-- 3-phone fan stage -->
+  <div class="hero-stage">
+    <!-- floating stat cards -->
+    <div class="hstat s1">
+      <div class="sl">HRV</div>
+      <div class="sv">47 <small style="font-size:13px;color:var(--faint)">ms</small><span class="sd dn">↓ 19%</span></div>
+    </div>
+    <div class="hstat s2">
+      <div class="sl">Readiness</div>
+      <div class="sv">Strained <span class="sd w">48/100</span></div>
+    </div>
+    <div class="hstat s3">
+      <div class="sl">Sleep</div>
+      <div class="sv">6h 42m <span class="sd dn">↓ 8%</span></div>
+    </div>
+    <div class="hstat s4">
+      <div class="sl">Illness signal</div>
+      <div class="sv">34% <span class="sd w">next 48–72h</span></div>
+    </div>
+
+    <!-- left phone -->
+    <div class="hphone l">
+      <div class="phone" style="width:100%">
         <div class="notch"></div>
-        <div class="glass-shot"><img class="on" src="img/app-today.png" alt="Yura dashboard" /></div>
+        <div class="glass-shot"><img class="on" src="img/app-predict.png" alt="Predictive signals" /></div>
+      </div>
+    </div>
+    <!-- center phone -->
+    <div class="hphone c">
+      <div class="phone" style="width:100%">
+        <div class="notch"></div>
+        <div class="glass-shot"><img class="on" src="img/app-today.png" alt="Today" /></div>
+      </div>
+    </div>
+    <!-- right phone -->
+    <div class="hphone r">
+      <div class="phone" style="width:100%">
+        <div class="notch"></div>
+        <div class="glass-shot"><img class="on" src="img/app-doctor.png" alt="Doctor" /></div>
       </div>
     </div>
   </div>
