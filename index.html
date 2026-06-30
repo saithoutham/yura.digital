@@ -79,44 +79,20 @@ h1,h2,h3{font-family:var(--disp);letter-spacing:-.03em;line-height:1.0;font-weig
 @media(max-width:760px){.nav .links a:not(.cta){display:none}}
 
 /* ---- HERO ---- */
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:end;overflow:hidden;position:relative;z-index:3;padding:0}
-.hero-scene{position:absolute;inset:0;z-index:0;pointer-events:none}
-/* subtle grain */
-.grain{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.09;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:140px 140px}
-/* vertical divider line */
-.hero-line{position:absolute;left:50%;top:80px;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.07) 20%,rgba(255,255,255,.07) 80%,transparent);z-index:2;pointer-events:none}
+.hero{position:relative;z-index:3;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding:0 60px 80px}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:
+  linear-gradient(to bottom,var(--void) 0%,transparent 18%,transparent 70%,var(--void) 100%),
+  linear-gradient(to right,var(--void) 0%,transparent 40%)}
+.hero .copy{position:relative;z-index:4;max-width:780px}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.hero h1{font-family:var(--head);font-size:clamp(52px,7.5vw,120px);font-weight:500;letter-spacing:-.06em;margin:0;line-height:.92;color:var(--ink);opacity:0;animation:rise .9s var(--ease) .1s forwards}
+.hero .row{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap;opacity:0;animation:rise .9s var(--ease) .3s forwards}
+.hero .row .btn{font-size:14px;padding:12px 22px}
 
-/* LEFT: headline pinned to bottom-left */
-.hero .copy{position:relative;z-index:4;padding:140px 60px 80px 60px;display:flex;flex-direction:column;justify-content:flex-end;align-self:stretch}
-@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-.hero h1{font-family:var(--head);font-size:clamp(48px,5.2vw,88px);font-weight:500;letter-spacing:-.055em;margin:0;line-height:.96;color:var(--ink);opacity:0;animation:rise 1s var(--ease) .05s forwards}
-.hero p.sub{font-size:clamp(14px,1.2vw,17px);color:var(--sub);font-weight:400;max-width:400px;margin:20px 0 0;line-height:1.65;opacity:0;animation:rise 1s var(--ease) .2s forwards}
-.hero .row{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;opacity:0;animation:rise 1s var(--ease) .35s forwards}
-.hero .note{margin-top:14px;font-size:11.5px;color:var(--faint);opacity:0;animation:rise 1s var(--ease) .45s forwards}
-
-/* RIGHT: animated canvas art */
-.hero-art{position:relative;z-index:4;align-self:stretch;overflow:hidden}
-#heroCanvas{position:absolute;inset:0;width:100%;height:100%;opacity:0;animation:rise 1.4s var(--ease) .3s forwards}
-/* vignette edges */
-.hero-art::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:
-  linear-gradient(to right,var(--void) 0%,transparent 12%,transparent 88%,var(--void) 100%),
-  linear-gradient(to bottom,var(--void) 0%,transparent 12%,transparent 75%,var(--void) 100%)}
-
-@media(max-width:900px){
-  .hero{grid-template-columns:1fr;min-height:auto;padding-bottom:0}
-  .hero-line{display:none}
-  .hero .copy{padding:120px 32px 40px;align-self:auto}
-  .hero h1{font-size:clamp(40px,9vw,64px)}
-  .hero p.sub{max-width:100%}
-  .hero-art{height:300px}
-}
-@media(max-width:600px){
-  .hero .copy{padding:110px 20px 36px}
-  .hero h1{font-size:36px}
-  .hero p.sub{font-size:14px}
-  .hero .row{flex-direction:column;gap:10px}
-  .hero-art{height:220px}
+@media(max-width:768px){
+  .hero{padding:0 24px 60px}
+  .hero h1{font-size:clamp(38px,10vw,58px)}
   .pad{padding:70px 0}
   .wrap{padding:0 18px}
   .shead h2{font-size:28px}
@@ -307,25 +283,13 @@ footer .disc{margin-top:50px;padding-top:26px;border-top:1px solid var(--line);c
 
 <!-- HERO -->
 <header class="hero" id="top">
-  <div class="hero-scene">
-    <div class="grain"></div>
-    <div class="hero-line"></div>
-  </div>
-
-  <!-- LEFT: headline -->
+  <canvas id="heroCanvas"></canvas>
   <div class="copy">
-    <h1>Wearable<br>healthcare,<br><span class="shine">reinvented.</span></h1>
-    <p class="sub">Every wearable you own, unified. Your personal baseline, learned. What's coming, flagged — days before you'd feel it.</p>
+    <h1>Your health, predicted<br><span class="shine">before you feel it.</span></h1>
     <div class="row">
       <a class="btn btn-iris" href="signup.html">Get early access</a>
-      <a class="btn btn-ghost" href="#demo">Try the demo</a>
+      <a class="btn btn-ghost" href="#how">How it works</a>
     </div>
-    <p class="note">Not a medical device. Wellness insights only.</p>
-  </div>
-
-  <!-- RIGHT: animated health signals canvas -->
-  <div class="hero-art">
-    <canvas id="heroCanvas"></canvas>
   </div>
 </header>
 
@@ -553,89 +517,64 @@ const stepIO = new IntersectionObserver((es)=>{es.forEach(e=>{
 });},{rootMargin:'-45% 0px -45% 0px',threshold:0});
 steps.forEach(s=>stepIO.observe(s));
 
-/* ---- hero canvas: animated health signals ---- */
+/* ---- hero canvas: full-bleed animated health signals ---- */
 (function(){
   const canvas = document.getElementById('heroCanvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  let W, H, raf;
+  let W, H;
 
-  // signal definitions
   const SIGNALS = [
-    { label:'HRV',       color:'rgba(170,182,255,', freq:0.018, amp:0.12, phase:0,    speed:0.4,  y:0.22 },
-    { label:'Heart Rate',color:'rgba(255,160,160,', freq:0.032, amp:0.07, phase:1.2,  speed:0.6,  y:0.38 },
-    { label:'Sleep',     color:'rgba(140,200,255,', freq:0.008, amp:0.09, phase:2.4,  speed:0.25, y:0.55 },
-    { label:'SpO₂',      color:'rgba(160,255,200,', freq:0.025, amp:0.04, phase:0.8,  speed:0.5,  y:0.70 },
-    { label:'Stress',    color:'rgba(255,190,120,', freq:0.014, amp:0.06, phase:3.1,  speed:0.35, y:0.84 },
+    { color:'rgba(150,165,255,', freq:0.015, amp:0.14, phase:0,    speed:0.35, y:0.18 },
+    { color:'rgba(255,140,130,', freq:0.028, amp:0.09, phase:1.5,  speed:0.55, y:0.34 },
+    { color:'rgba(120,200,255,', freq:0.010, amp:0.11, phase:2.8,  speed:0.22, y:0.50 },
+    { color:'rgba(130,255,180,', freq:0.022, amp:0.05, phase:0.7,  speed:0.45, y:0.65 },
+    { color:'rgba(255,180,100,', freq:0.012, amp:0.08, phase:3.5,  speed:0.30, y:0.80 },
   ];
 
   let t = 0;
 
   function resize() {
-    const rect = canvas.parentElement.getBoundingClientRect();
-    W = canvas.width  = rect.width  * devicePixelRatio;
-    H = canvas.height = rect.height * devicePixelRatio;
-    canvas.style.width  = rect.width  + 'px';
-    canvas.style.height = rect.height + 'px';
+    const r = canvas.parentElement.getBoundingClientRect();
+    W = canvas.width  = r.width * devicePixelRatio;
+    H = canvas.height = r.height * devicePixelRatio;
+    canvas.style.width  = r.width + 'px';
+    canvas.style.height = r.height + 'px';
   }
 
-  function ecgPulse(x, freq, phase) {
-    // blend smooth sine with sharp ECG spike
-    const p = ((x * freq + phase) % (Math.PI * 2) + Math.PI * 2) % (Math.PI * 2);
+  function ecg(x, freq, phase) {
+    const p = ((x * freq + phase) % (Math.PI*2) + Math.PI*2) % (Math.PI*2);
     const sine = Math.sin(x * freq + phase);
-    // spike at p near PI
-    const dist = Math.abs(p - Math.PI);
-    const spike = dist < 0.28 ? Math.exp(-dist * dist * 40) * (dist < 0.14 ? 3.5 : -1.8) : 0;
-    return sine * 0.4 + spike;
+    const d = Math.abs(p - Math.PI);
+    const spike = d < 0.3 ? Math.exp(-d*d*35) * (d < 0.15 ? 4 : -2) : 0;
+    return sine * 0.35 + spike;
   }
 
   function draw() {
     ctx.clearRect(0, 0, W, H);
-
-    SIGNALS.forEach((sig, si) => {
+    SIGNALS.forEach(sig => {
       const cy = sig.y * H;
       const amp = sig.amp * H;
-      const scroll = t * sig.speed * W * 0.001;
-
+      const scroll = t * sig.speed * W * 0.0008;
       ctx.save();
-      // glow pass
-      ctx.shadowColor = sig.color + '0.6)';
-      ctx.shadowBlur = 18 * devicePixelRatio;
-      ctx.strokeStyle = sig.color + '0.55)';
-      ctx.lineWidth = 1.5 * devicePixelRatio;
+      ctx.shadowColor = sig.color + '0.5)';
+      ctx.shadowBlur = 22 * devicePixelRatio;
+      ctx.strokeStyle = sig.color + '0.35)';
+      ctx.lineWidth = 1.8 * devicePixelRatio;
       ctx.beginPath();
       for (let px = 0; px <= W; px += 2) {
-        const xv = px + scroll;
-        const y = cy + ecgPulse(xv, sig.freq, sig.phase) * amp;
+        const y = cy + ecg(px + scroll, sig.freq, sig.phase) * amp;
         px === 0 ? ctx.moveTo(px, y) : ctx.lineTo(px, y);
       }
       ctx.stroke();
-
-      // bright line pass
-      ctx.shadowBlur = 6 * devicePixelRatio;
-      ctx.strokeStyle = sig.color + '0.85)';
+      ctx.shadowBlur = 4 * devicePixelRatio;
+      ctx.strokeStyle = sig.color + '0.7)';
       ctx.lineWidth = 1 * devicePixelRatio;
       ctx.stroke();
-
-      // label at left edge
-      ctx.shadowBlur = 0;
-      ctx.font = `${11 * devicePixelRatio}px Inter,sans-serif`;
-      ctx.fillStyle = sig.color + '0.45)';
-      ctx.fillText(sig.label.toUpperCase(), 14 * devicePixelRatio, cy - amp - 8 * devicePixelRatio);
-
-      // baseline faint rule
-      ctx.strokeStyle = sig.color + '0.07)';
-      ctx.lineWidth = 0.5 * devicePixelRatio;
-      ctx.shadowBlur = 0;
-      ctx.beginPath();
-      ctx.moveTo(0, cy); ctx.lineTo(W, cy);
-      ctx.stroke();
-
       ctx.restore();
     });
-
     t++;
-    raf = requestAnimationFrame(draw);
+    requestAnimationFrame(draw);
   }
 
   resize();
