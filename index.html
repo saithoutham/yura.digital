@@ -38,8 +38,8 @@ section{position:relative;z-index:2}
 h1,h2,h3{font-family:var(--disp);letter-spacing:-.03em;line-height:1.0;font-weight:600}
 /* major headings: super-tight tracking */
 .hero h1,.shead h2,.statement h2,.cta h2,.story .step h3,footer .word{font-family:var(--head);font-weight:500;letter-spacing:-.06em}
-.grad{background:var(--iris);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 2px;display:inline-block}
-.shine{background:var(--shine);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+.grad{background:var(--iris);-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 2px 4px;display:inline-block}
+.shine{background:var(--shine);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite;padding:0 4px 6px 0;display:inline-block}
 @keyframes shine{to{background-position:220% center}}
 .eyebrow{font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--faint)}
 
@@ -68,8 +68,8 @@ h1,h2,h3{font-family:var(--disp);letter-spacing:-.03em;line-height:1.0;font-weig
 
 /* nav */
 .nav{position:fixed;top:0;left:0;right:0;z-index:60;transition:.35s var(--ease)}
-.nav .in{max-width:1200px;margin:0 auto;padding:20px 32px;display:flex;align-items:center;gap:34px}
-.nav .logo{height:24px;display:block}
+.nav .in{max-width:100%;margin:0;padding:18px 40px;display:flex;align-items:center;gap:34px}
+.nav .logo{height:28px;width:auto;display:block}
 .nav .links{display:flex;gap:30px;margin-left:auto;align-items:center}
 .nav .links a{font-size:14px;font-weight:500;color:var(--dim)}
 .nav .links a:hover{color:var(--ink)}
@@ -79,20 +79,30 @@ h1,h2,h3{font-family:var(--disp);letter-spacing:-.03em;line-height:1.0;font-weig
 @media(max-width:760px){.nav .links a:not(.cta){display:none}}
 
 /* ---- HERO ---- */
-.hero{position:relative;z-index:3;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding:0 60px 80px}
+.hero{position:relative;z-index:3;min-height:calc(86vh + 4rem);min-height:100svh;width:100%;overflow:hidden;background:#08090d}
 #heroCanvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:
   linear-gradient(to bottom,var(--void) 0%,transparent 18%,transparent 70%,var(--void) 100%),
   linear-gradient(to right,var(--void) 0%,transparent 40%)}
-.hero .copy{position:relative;z-index:4;max-width:780px}
-@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-.hero h1{font-family:var(--head);font-size:clamp(52px,7.5vw,120px);font-weight:500;letter-spacing:-.06em;margin:0;line-height:.92;color:var(--ink);opacity:0;animation:rise .9s var(--ease) .1s forwards}
-.hero .row{display:flex;gap:12px;margin-top:36px;flex-wrap:wrap;opacity:0;animation:rise .9s var(--ease) .3s forwards}
-.hero .row .btn{font-size:14px;padding:12px 22px}
+/* headline — bottom-left */
+.hero .copy{position:absolute;bottom:0;left:0;z-index:10;max-width:720px;padding:0 40px 72px 52px}
+/* word-by-word entrance */
+.hero h1{font-family:var(--head);font-size:clamp(44px,5.8vw,80px);font-weight:400;letter-spacing:-.055em;margin:0;line-height:.92;color:#fefefe}
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(14px);animation:word-in .7s cubic-bezier(.22,.7,.3,1) forwards;margin-right:.22em}
+@keyframes word-in{to{opacity:1;transform:none}}
+.hero .row{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap;opacity:0;animation:rise .8s var(--ease) 1s forwards}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero .row .btn-iris{background:var(--iris);color:var(--btn-ink);box-shadow:0 10px 40px -8px var(--glow)}
+.hero .row .btn-iris:hover{transform:translateY(-2px);box-shadow:0 16px 50px -6px var(--glow)}
+.hero .row .btn-ghost{background:rgba(255,255,255,.04);border-color:var(--line-2);color:var(--ink)}
+.hero .row .btn-ghost:hover{background:rgba(255,255,255,.08)}
 
-@media(max-width:768px){
-  .hero{padding:0 24px 60px}
-  .hero h1{font-size:clamp(38px,10vw,58px)}
+@media(max-width:600px){
+  .hero{min-height:calc(80vh + 4rem)}
+  .hero .copy{padding:0 20px 44px 24px;max-width:100%}
+  .hero h1{font-size:30px}
+  .hero h1 .w{margin-right:.18em}
+  .hero .row{flex-direction:column;align-items:flex-start;gap:10px}
   .pad{padding:70px 0}
   .wrap{padding:0 18px}
   .shead h2{font-size:28px}
@@ -240,7 +250,7 @@ footer{padding:80px 0 50px;position:relative;overflow:hidden;z-index:2}
 footer .fland{position:absolute;inset:0;z-index:0;background:url('img/land-b.png') center 45%/cover;opacity:.22;filter:grayscale(1) contrast(1.1) brightness(1.05);
   -webkit-mask-image:linear-gradient(to bottom,transparent,#000 30%,#000 80%,transparent);mask-image:linear-gradient(to bottom,transparent,#000 30%,#000 80%,transparent);pointer-events:none}
 footer .wrap{position:relative;z-index:1}
-footer .word{font-family:var(--disp);font-weight:800;font-size:clamp(80px,22vw,300px);letter-spacing:-.05em;line-height:.8;
+footer .word{font-family:var(--disp);font-weight:800;font-size:clamp(70px,18vw,240px);letter-spacing:-.05em;line-height:.85;
   color:var(--word-fade);text-align:center;margin-bottom:50px;user-select:none}
 footer .cols{display:flex;flex-wrap:wrap;gap:50px;justify-content:space-between;align-items:flex-start}
 footer .about{max-width:320px}
@@ -284,8 +294,9 @@ footer .disc{margin-top:50px;padding-top:26px;border-top:1px solid var(--line);c
 <!-- HERO -->
 <header class="hero" id="top">
   <canvas id="heroCanvas"></canvas>
+  <!-- headline bottom-left, word-by-word -->
   <div class="copy">
-    <h1>Your health, predicted<br><span class="shine">before you feel it.</span></h1>
+    <h1 id="heroH1"></h1>
     <div class="row">
       <a class="btn btn-iris" href="signup.html">Get early access</a>
       <a class="btn btn-ghost" href="#how">How it works</a>
@@ -484,44 +495,32 @@ footer .disc{margin-top:50px;padding-top:26px;border-top:1px solid var(--line);c
 const io = new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
 
-/* nav + hero landscape parallax + 3D phone scroll-reveal */
-const nav = document.getElementById('nav');
-const layers = [...document.querySelectorAll('.hlay')];
-let mx=0,my=0,tmx=0,tmy=0,scrollY=0;
-
-function render(){
-  mx+=(tmx-mx)*0.07; my+=(tmy-my)*0.07;
-  nav.classList.toggle('scrolled', scrollY>40);
-  // landscape parallax (scroll + subtle mouse)
-  layers.forEach(l=>{
-    const d=+l.dataset.depth;
-    const sy = scrollY*(d/100)*-0.45 + my*(d/100)*10;
-    const px = mx*(d/100)*14;
-    l.style.transform = `translate3d(${px}px,${sy}px,0) scale(1.08)`;
+/* hero word-by-word headline */
+(function(){
+  const h1 = document.getElementById('heroH1');
+  if (!h1) return;
+  const text = 'Your health, predicted before you feel it.';
+  const words = text.split(' ');
+  // "before you feel it." gets the shine class
+  const shineStart = 3; // index of "before"
+  words.forEach((word, i) => {
+    const span = document.createElement('span');
+    span.className = 'w' + (i >= shineStart ? ' shine' : '');
+    span.textContent = word;
+    // randomized delay: base + jitter (Anthropic technique)
+    const delay = (0.15 + i * 0.08 + Math.random() * 0.04).toFixed(3);
+    span.style.animationDelay = delay + 's';
+    h1.appendChild(span);
   });
-  requestAnimationFrame(render);
-}
-window.addEventListener('scroll', ()=>{ scrollY=window.scrollY; }, {passive:true});
-window.addEventListener('mousemove', (e)=>{ tmx=(e.clientX/window.innerWidth-.5)*2; tmy=(e.clientY/window.innerHeight-.5)*2; }, {passive:true});
-scrollY=window.scrollY; render();
+})();
 
-/* scrollytelling */
-const steps = [...document.querySelectorAll('#storySteps .step')];
-const shots = [...document.querySelectorAll('#storyPhone img')];
-const stepIO = new IntersectionObserver((es)=>{es.forEach(e=>{
-  if(e.isIntersecting){
-    const i=+e.target.dataset.i;
-    steps.forEach(s=>s.classList.toggle('active',s===e.target));
-    shots.forEach(s=>s.classList.toggle('on',+s.dataset.i===i));
-  }
-});},{rootMargin:'-45% 0px -45% 0px',threshold:0});
-steps.forEach(s=>stepIO.observe(s));
 
 /* ---- hero canvas: full-bleed animated health signals ---- */
 (function(){
   const canvas = document.getElementById('heroCanvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
+
   let W, H;
 
   const SIGNALS = [
@@ -581,6 +580,26 @@ steps.forEach(s=>stepIO.observe(s));
   window.addEventListener('resize', resize);
   draw();
 })();
+
+/* nav scroll */
+const nav = document.getElementById('nav');
+let scrollY=0;
+function render(){ nav.classList.toggle('scrolled', scrollY>40); requestAnimationFrame(render); }
+window.addEventListener('scroll', ()=>{ scrollY=window.scrollY; }, {passive:true});
+scrollY=window.scrollY; render();
+
+/* scrollytelling */
+const steps = [...document.querySelectorAll('#storySteps .step')];
+const shots = [...document.querySelectorAll('#storyPhone img')];
+const stepIO = new IntersectionObserver((es)=>{es.forEach(e=>{
+  if(e.isIntersecting){
+    const i=+e.target.dataset.i;
+    steps.forEach(s=>s.classList.toggle('active',s===e.target));
+    shots.forEach(s=>s.classList.toggle('on',+s.dataset.i===i));
+  }
+});},{rootMargin:'-45% 0px -45% 0px',threshold:0});
+steps.forEach(s=>stepIO.observe(s));
+
 
 </script>
 </body>
